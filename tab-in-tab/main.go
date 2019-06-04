@@ -44,6 +44,7 @@ func newTabInTabUI() *fyne.Container {
 		widget.NewTabItem("Tab 0", tabPanel[0]),
 		widget.NewTabItem("Tab 1", tabPanel[1]),
 		widget.NewTabItem("Tab Tab", tabTab),
+		//widget.NewTabItem("Tab Tab", tabPanel[2]),   // still get the same issue without nested tabs too
 		widget.NewTabItem("Tab 3", tabPanel[3]),
 	)
 	tabContainer.SetTabLocation(widget.TabLocationLeading)
