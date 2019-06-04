@@ -1,8 +1,8 @@
-all: run
+SUBDIRS := tab-in-tab
 
-build: 
-	go build ./...
+all: $(SUBDIRS)
 
-run: 
-	go run ./...
+$(SUBDIRS):
+	$(MAKE) -C $@
 
+.PHONY: all $(SUBDIRS)
