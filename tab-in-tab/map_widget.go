@@ -13,11 +13,13 @@ type MapWidget struct {
 	position fyne.Position
 	hidden   bool
 	mapData string
+	other *MapWidget
 }
 
-func newMapWidget(mapData string) *MapWidget {
+func newMapWidget(mapData string, other *MapWidget) *MapWidget {
 	mw := &MapWidget{
 		mapData: mapData,
+		other: other,
 	}
 	mw.Resize(mw.MinSize())
 	return mw
@@ -60,12 +62,18 @@ func (mw *MapWidget) Visible() bool {
 // Show sets the mapWidget to be visible
 func (mw *MapWidget) Show() {
 	println("widget show")
+	if mw.other != nil {
+		mw.other.Hide()
+	}
 	mw.hidden = false
 }
 
 // Hide sets the mapWidget to be not visible
 func (mw *MapWidget) Hide() {
 	println("widget hide")
+	if mw.other != nil {
+		mw.other.Show()
+	}
 	mw.hidden = true
 }
 

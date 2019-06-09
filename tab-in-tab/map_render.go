@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -73,6 +74,7 @@ func (r *mapRender) Refresh() {
 
 func (r *mapRender) getImage(w, h int) image.Image {
 	println("been asked to getImage and hidden =", r.mw.hidden, w, h)
+	fmt.Printf("%p %p", r, r.mw)
 	if r.img != nil {
 		spew.Dump(r.img.Bounds())
 	}

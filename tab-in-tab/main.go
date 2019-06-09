@@ -39,17 +39,18 @@ func newTabInTabUI() *fyne.Container {
 		widget.NewTabItem("H2", widget.NewLabel("another label here")),
 	)
 
-	l := layout.NewBorderLayout(header, footer, nil, nil)
+	map2 := newMapWidget("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", nil)
+	l := layout.NewBorderLayout(header, footer, nil, map2)
 	tabContainer := widget.NewTabContainer(
 		widget.NewTabItem("Tab 0", tabPanel[0]),
 		widget.NewTabItem("Tab 1", tabPanel[1]),
 		widget.NewTabItem("Tab Tab", tabTab),
 		//widget.NewTabItem("Tab Tab", tabPanel[2]),   // still get the same issue without nested tabs too
 		widget.NewTabItem("Tab 3", tabPanel[3]),
-		widget.NewTabItem("Map", newMapWidget("                               ")),
+		widget.NewTabItem("Map", newMapWidget("                               ",map2)),
 	)
 	tabContainer.SetTabLocation(widget.TabLocationLeading)
-	return fyne.NewContainerWithLayout(l, header, footer, tabContainer)
+	return fyne.NewContainerWithLayout(l, header, footer, map2, tabContainer)
 }
 
 
@@ -74,7 +75,7 @@ func newTabInTabUICustom() *fyne.Container {
 		widget.NewTabItem("Tab 1", tabPanel[1]),
 		widget.NewTabItem("Tab Tab", tabTab),
 		widget.NewTabItem("Tab 3", tabPanel[3]),
-		widget.NewTabItem("Map", newMapWidget("                               ")),
+		widget.NewTabItem("Map", newMapWidget("                               ",nil)),
 	)
 	tabContainer.SetTabLocation(widget.TabLocationLeading)
 	return fyne.NewContainerWithLayout(l, header, footer, tabContainer)
