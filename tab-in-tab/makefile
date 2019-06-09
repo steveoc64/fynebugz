@@ -1,7 +1,7 @@
 all: run
 
 run:
-	go run main.go
+	go run ./...
 
 custom:
-	go run main.go -custom
+	go run ./... -custom

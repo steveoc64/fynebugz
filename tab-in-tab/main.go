@@ -74,6 +74,7 @@ func newTabInTabUICustom() *fyne.Container {
 		widget.NewTabItem("Tab 1", tabPanel[1]),
 		widget.NewTabItem("Tab Tab", tabTab),
 		widget.NewTabItem("Tab 3", tabPanel[3]),
+		widget.NewTabItem("Map", newMapWidget("                               ")),
 	)
 	tabContainer.SetTabLocation(widget.TabLocationLeading)
 	return fyne.NewContainerWithLayout(l, header, footer, tabContainer)
