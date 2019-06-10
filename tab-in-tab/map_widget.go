@@ -66,6 +66,9 @@ func (mw *MapWidget) Show() {
 		mw.other.Hide()
 	}
 	mw.hidden = false
+	for _,obj := range widget.Renderer(mw).Objects() {
+		obj.Show()
+	}
 }
 
 // Hide sets the mapWidget to be not visible
@@ -75,6 +78,9 @@ func (mw *MapWidget) Hide() {
 		mw.other.Show()
 	}
 	mw.hidden = true
+	for _,obj := range widget.Renderer(mw).Objects() {
+		obj.Hide()
+	}
 }
 
 // ApplyTheme applies the theme to the mapWidget

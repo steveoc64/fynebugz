@@ -6,6 +6,7 @@ import (
 	"image/color"
 	"image/draw"
 	"math/rand"
+	"runtime/debug"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/canvas"
@@ -24,7 +25,14 @@ type mapRender struct {
 
 func newMapRender(mw *MapWidget) *mapRender {
 	r := &mapRender{mw: mw, X: 6, Y: 4}
+	fmt.Printf("newMapRender at %p %T\n", r, r)
+
 	render := canvas.NewRaster(r.getImage)
+	fmt.Printf("newRaster at %p %T\n", render, render)
+	fmt.Printf("my parent widget %p %T (visible %v)\n", mw, mw, mw.Visible())
+	fmt.Printf("render visible %v\n", render.Visible())
+	render.Hide()
+	fmt.Printf("render now visible %v\n", render.Visible())
 	//render := canvas.NewRasterWithPixels(r.paint2)
 	r.render = render
 	r.objects = []fyne.CanvasObject{render}
@@ -73,19 +81,19 @@ func (r *mapRender) Refresh() {
 }
 
 func (r *mapRender) getImage(w, h int) image.Image {
-	println("been asked to getImage and hidden =", r.mw.hidden, w, h)
-	fmt.Printf("%p %p", r, r.mw)
+	fmt.Printf("getImage %p %T %p %T (hidden %v)\n", r, r, r.mw, r.mw, r.mw.hidden)
 	if r.img != nil {
-		spew.Dump(r.img.Bounds())
+		spew.Dump("img is currently nil", r.img.Bounds())
+	}
+	// this wont exactly fix the problem, but it will hide it !
+	if false && r.mw.hidden {
+		blank := &image.RGBA{}
+		fmt.Printf("returning blank for hidden %p = %p\n", r, blank)
+		debug.PrintStack()
+		return blank
 	}
 	if r.img == nil || r.img.Bounds().Size().X != w || r.img.Bounds().Size().Y != h {
 		r.img = r.generateImage(w, h)
-	}
-	// this wont exactly fix the problem, but it will hide it !
-	if false {
-		if r.mw.hidden {
-			return &image.RGBA{}
-		}
 	}
 	return r.img
 }
