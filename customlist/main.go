@@ -46,6 +46,9 @@ func newCustomListUI() *fyne.Container {
 	return fyne.NewContainerWithLayout(l, header, footer, tabContainer)
 }
 
+// customList is an example of a Thin Wrapper around a standard widget - in this case
+// a Box widget, as it embeds a box, and only overrides the Show() method to customise
+// its contents when made visible.
 type customList struct {
 	widget.Box
 	btn        *widget.Button
