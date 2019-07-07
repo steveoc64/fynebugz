@@ -22,6 +22,7 @@ func main() {
 
 // our data model - just a list of things
 var items []string
+var itemID = 1
 
 func newCustomListUI() *fyne.Container {
 	header := widget.NewHBox(widget.NewLabel("The Header"))
@@ -66,6 +67,7 @@ func newCustomList() *customList {
 }
 
 func (l *customList) Show() {
+	println("SHOW the list - so the tab just become visible")
 	// update the button
 	icon := theme.CheckButtonIcon()
 	if len(items) > 3 {
@@ -76,15 +78,25 @@ func (l *customList) Show() {
 	l.btn.SetText(fmt.Sprintf("Is %d items enough yet ?", len(items)))
 
 	// update the static label
-	l.firstLabel.SetText(fmt.Sprintf("This label has been updated, and paints OK"))
+	l.firstLabel.SetText(fmt.Sprintf("This label has been updated, and updates immediately"))
 
-	// truncate the contents
-	l.Children = l.Children[:2]
+	// truncate the contents to 2 so we can append all the items onto the slice
+	// NOTE - comment this l.Children line out, and you get the following behaviour :
+	// - each Show() will paint the items that were added previously
+	// - the new items take up extra space, but dont render in this call
+	// - but they will render in the next call
+
+	// If you un-comment this line, then you get this behaviour
+	// - each Show() will take up extra space, because the new items layout
+	// - but the new items will never paint
+
+	// l.Children = l.Children[:2]
 
 	// add new contents
 	for _, v := range items {
-		println("appending a new label with contents", v)
-		l.Append(widget.NewLabel(v))
+		fmt.Printf("appending a new label [%d]  with contents '%s'\n", itemID, v)
+		l.Append(widget.NewLabel(fmt.Sprintf("[%d] %s", itemID, v)))
+		itemID++
 	}
 	// paint it all
 	l.Box.Show()
