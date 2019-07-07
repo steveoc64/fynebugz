@@ -76,7 +76,7 @@ func (l *customList) Show() {
 	l.btn.SetText(fmt.Sprintf("Is %d items enough yet ?", len(items)))
 
 	// update the static label
-	l.firstLabel.SetText(fmt.Sprintf("We have been changed"))
+	l.firstLabel.SetText(fmt.Sprintf("This label has been updated, and paints OK"))
 
 	// truncate the contents
 	l.Children = l.Children[:2]
