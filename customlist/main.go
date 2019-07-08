@@ -77,8 +77,11 @@ func (l *customList) Show() {
 		// we have 3 or more, so set the checked box
 		icon = theme.CheckButtonCheckedIcon()
 	}
+	println("setting icon in the app::Show() to", icon.Name())
+	l.btn.SetIcon(nil)
 	l.btn.SetIcon(icon)
 	l.btn.SetText(fmt.Sprintf("Is %d items enough yet ?", len(items)))
+	l.btn.Show()
 
 	// update the static label
 	l.firstLabel.SetText(fmt.Sprintf("This label has been updated, and updates immediately"))
@@ -93,7 +96,7 @@ func (l *customList) Show() {
 	// - each Show() will take up extra space, because the new items layout
 	// - but the new items will never paint
 
-	// l.Children = l.Children[:2]
+	l.Children = l.Children[:2]
 
 	// add new contents
 	for _, v := range items {
