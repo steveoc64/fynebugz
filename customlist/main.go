@@ -78,7 +78,9 @@ func (l *customList) Show() {
 		icon = theme.CheckButtonCheckedIcon()
 	}
 	println("setting icon in the app::Show() to", icon.Name())
+	l.btn.Hide()
 	l.btn.SetIcon(nil)
+	l.btn.Show()
 	l.btn.SetIcon(icon)
 	l.btn.SetText(fmt.Sprintf("Is %d items enough yet ?", len(items)))
 	l.btn.Show()
